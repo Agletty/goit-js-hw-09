@@ -19,21 +19,26 @@ function onTextareaInput(event) {
 
 function onFormSubmit(event) {
   event.preventDefault();
-  if (email.value === '' || message.value === '') {
+  const registForm = {
+    email: email.value,
+    message: message.value,
+  };
+
+  if (registForm.email === '' || registForm.message === '') {
     alert('Заповніть всі поля форми!');
     return;
   }
-  console.log(feedbackForm);
+
+  console.log(registForm);
 
   form.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
 
 function updateOutput() {
-  const savedMessage = localStorage.getItem(STORAGE_KEY);
-  console.log(savedMessage);
+  const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (savedMessage) {
-    email.value = savedMessage.email || '';
-    message.value = savedMessage.message || '';
+    email.value = savedMessage.email;
+    message.value = savedMessage.message;
   }
 }

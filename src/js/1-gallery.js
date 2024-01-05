@@ -1,3 +1,4 @@
+import SimpleLightbox from 'simplelightbox';
 const images = [
   {
     preview:
@@ -65,7 +66,7 @@ const images = [
 ];
 
 const gallery = document.querySelector('.gallery');
-gallery.innerHTML = createMarkup(images);
+gallery.insertAdjacentHTML('beforeend', createMarkup(images));
 
 function createMarkup(images) {
   return images
@@ -84,7 +85,6 @@ function createMarkup(images) {
     .join('');
 }
 
-import SimpleLightbox from 'simplelightbox';
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
