@@ -10,8 +10,6 @@ form.addEventListener('input', onTextareaInput);
 updateOutput();
 
 function onTextareaInput(event) {
-  event.preventDefault();
-
   feedbackForm.email = email.value.trim();
   feedbackForm.message = message.value.trim();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(feedbackForm));
@@ -20,15 +18,14 @@ function onTextareaInput(event) {
 function onFormSubmit(event) {
   event.preventDefault();
   const registForm = {
-    email: email.value,
-    message: message.value,
+    email: email.value.trim(),
+    message: message.value.trim(),
   };
 
   if (registForm.email === '' || registForm.message === '') {
     alert('Заповніть всі поля форми!');
     return;
   }
-
   console.log(registForm);
 
   form.reset();
@@ -38,7 +35,7 @@ function onFormSubmit(event) {
 function updateOutput() {
   const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (savedMessage) {
-    email.value = savedMessage.email;
-    message.value = savedMessage.message;
+    email.value = savedMessage.email || '';
+    message.value = savedMessage.message || '';
   }
 }
